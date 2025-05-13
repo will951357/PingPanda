@@ -1,0 +1,18 @@
+# Ignorar arquivos .env do frontend e backend
+frontend/.env
+backend/.env
+
+# Ignorar arquivos de build
+frontend/dist
+backend/dist
+
+# Ignorar pastas de dependências
+frontend/node_modules
+backend/node_modules
+
+# Logs
+*.log
+
+# Outras opções comuns
+.DS_Store
+.env
