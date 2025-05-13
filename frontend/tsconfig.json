@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",  // Define a versão do JavaScript para a qual o
+    "useDefineForClassFields": true,  // Habilita o uso de campos de classe definidos
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+    ],  // Especifica as bibliotecas padrão a serem incluídas
+    "allowJs": false,  // Permite arquivos JavaScript
+    "skipLibCheck": true,  // Ignora a verificação de tipos em arquivos de declaração
+    "esModuleInterop": true,  // Habilita compatibilidade com módulos CommonJS
+    "allowSyntheticDefaultImports": true,  // Permite importações padrão sintéticas
+    "strict": true,  // Habilita todas as verificações de tipo estritas
+    "forceConsistentCasingInFileNames": true,  // Força o uso consistente de maiúsculas e minúsculas em nomes de arquivos
+    "module": "ESNext",  // Especifica o sistema de módulos a ser usado
+    "moduleResolution": "Node",  // Especifica a estratégia de resolução de módulos
+    "resolveJsonModule": true,  // Permite a importação de arquivos JSON
+    "isolatedModules": true,  // Habilita o modo de módulo isolado
+    "noEmit": true,  // Não emite arquivos de saída
+
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "jsx": "react-jsx",
+  },
+  "include": [
+    "src"
+  ],
+  "esModuleInterop": true  // Habilita compatibilidade com módulos CommonJS  // Configuração JSX do React
+}

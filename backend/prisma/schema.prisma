@@ -1,0 +1,77 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String          @id @default(cuid())
+  externalId      String?         @unique
+  quotaLimit      Int
+  plan            Plan            @default(FREE)
+  email           String          @unique
+  apiKey          String          @unique @default(cuid())
+  discordId       String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  events          Event[]
+  EventCategories EventCategory[]
+  Quota           Quota?
+
+  @@index([email, apiKey])
+}
+
+model EventCategory {
+  id        String   @id @default(cuid())
+  name      String
+  color     Int
+  emoji     String?
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  events     Event[]
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([name, userId])
+}
+
+model Event {
+  id              String         @id @default(cuid())
+  formatedMessage String
+  userId          String
+  name            String
+  fields          Json
+  deliveryStatus  DeliveryStatus @default(PENDING)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  eventCategoryId String?
+  eventCategory   EventCategory? @relation(fields: [eventCategoryId], references: [id])
+  user            User           @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+}
+
+model Quota {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  year      Int
+  month     Int
+  count     Int      @default(0)
+  updatedAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum DeliveryStatus {
+  PENDING
+  DELIVERED
+  FAILED
+}
